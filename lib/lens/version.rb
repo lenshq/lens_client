@@ -1,0 +1,3 @@
+module Lens
+  VERSION = "0.0.1"
+end
