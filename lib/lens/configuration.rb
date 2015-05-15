@@ -19,7 +19,7 @@ module Lens
     end
 
     def default_host
-      'lens.staging.coub.com'
+      'lens.coub.com'
     end
   end
 end
