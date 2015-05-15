@@ -1,6 +1,7 @@
 require "lens/version"
 require "lens/configuration"
 require "lens/sender"
+require "lens/trace"
 
 module Lens
   if defined?(Rails)
