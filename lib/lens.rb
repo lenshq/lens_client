@@ -1,12 +1,27 @@
 require "lens/core"
+require 'pry'
 
 module Lens
-  def self.configure
-    yield(config)
-    config
-  end
+  HEADERS = {
+    'Content-type' => 'application/json',
+    'Content-Encoding' => 'deflate',
+    'Accept'       => 'text/json, application/json',
+    'User-Agent'   => "LENS-Ruby #{VERSION}; #{RUBY_VERSION}; #{RUBY_PLATFORM}"
+  }.freeze
 
-  def self.config
-    @config ||= Config.new
+  class << self
+    attr_accessor :sender
+    attr_writer :configuration
+
+    def configure
+      yield(configuration)
+
+      self.sender = Sender.new(configuration)
+      self.sender
+    end
+
+    def configuration
+      @configuration ||= Configuration.new
+    end
   end
 end
