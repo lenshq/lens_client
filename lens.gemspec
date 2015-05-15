@@ -6,10 +6,9 @@ require 'lens/version'
 Gem::Specification.new do |spec|
   spec.name          = "lens"
   spec.version       = Lens::VERSION
-  spec.authors       = ["kgorin"]
-  spec.email         = ["machineshopflow@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.authors       = ["kgorin", "artygus"]
+  spec.email         = ["me@kgor.in", "artygus@engineeram.net"]
+  spec.summary       = %q{Gem to send Rails request stats}
   spec.homepage      = ""
   spec.license       = "MIT"
 
