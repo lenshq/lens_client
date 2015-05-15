@@ -24,7 +24,7 @@ module Lens
     end
 
     def send_to_lens(data)
-      response = send_request(url.path, data, {'X-API-Key' => api_key})
+      response = send_request(url.path, data, {'X-API-Key' => secret})
     end
 
     attr_reader :app_id,
