@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["kgorin", "artygus"]
   spec.email         = ["me@kgor.in", "artygus@engineeram.net"]
   spec.summary       = %q{Gem to send Rails request stats}
-  spec.homepage      = ""
+  spec.homepage      = "http://coub.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency 'rspec'  , '~> 3.2.0'
+  spec.add_development_dependency "rake"   , '~> 0'
+  spec.add_development_dependency 'rspec'  , '~> 3.2'
   spec.add_development_dependency "pry"    , '~> 0.10'
-  spec.add_development_dependency "pry-nav"
+  spec.add_development_dependency "pry-nav", '~> 0'
 end
