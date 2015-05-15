@@ -13,9 +13,9 @@ module Helpers
   end
 
   def reset_config
-    Lend.configuration = nil
-    Lend.configure do |config|
-      config.app_key = 'app_key_123'
+    Lens.configuration = nil
+    Lens.configure do |config|
+      config.app_id = 'app_key_123'
       config.secret = 'abc123'
     end
   end
