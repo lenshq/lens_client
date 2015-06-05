@@ -8,7 +8,7 @@ module Lens
     end
 
     def add(event)
-      @data.push event.payload
+      @data.push event.payload.merge(duration: event.duration)
     end
 
     def complete(event)
