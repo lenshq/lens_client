@@ -1,15 +1,17 @@
 require 'rails'
 
 module Lens
-  class Trace
-    def self.current
+  class << Trace
+    def current
       Thread.current[:__lens_trace]
     end
 
-    def self.create(id)
+    def create(id)
       Thread.current[:__lens_trace] = new(id)
     end
+  end
 
+  class Trace
     def initialize(id)
       @id = id
       @data = []
@@ -21,9 +23,24 @@ module Lens
 
     def complete(event)
       formatted_data = Lens::EventFormatter.new(event, @data).format
-      Rails.logger.info "all [LENS] >>> #{formatted_data}"
-      Lens.sender.send_to_lens(formatted_data)
+      log(data)
+      send(data)
       Thread.current[:__lens_trace] = nil
+    end
+
+  private
+
+    def send(data)
+      log(data)
+      Lens.sender.send_to_lens(data)
+    end
+
+    def log(data)
+      Rails.logger.info "all [LENS] >>> #{data}" if verbose?
+    end
+
+    def verbose?
+      true
     end
   end
 end
