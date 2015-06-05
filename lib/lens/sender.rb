@@ -1,4 +1,5 @@
 require 'pry'
+require 'json'
 
 module Lens
   class Sender
@@ -45,7 +46,7 @@ module Lens
     end
 
     def send_request(path, data, headers = {})
-      http_connection.post(path, data, http_headers(headers))
+      http_connection.post(path, data.to_json, http_headers(headers))
     rescue *HTTP_ERRORS => e
       raise e
       nil
@@ -55,6 +56,7 @@ module Lens
       {}.tap do |hash|
         hash.merge!(HEADERS)
         hash.merge!({'X-Auth-Token' => app_key})
+        hash.merge!({'Content-Type' =>'application/json'})
         hash.merge!(headers) if headers
       end
     end
