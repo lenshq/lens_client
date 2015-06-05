@@ -28,6 +28,7 @@ module Lens
         method: event_payload[:method],
         url: event_payload[:path],
         records: @records,
+        time: Time.now,
         duration: @event.duration,
         meta: {
           client_version: VERSION
