@@ -5,8 +5,8 @@ describe Lens::EventFormatter do
   let(:records) { [] }
   let(:formatter) { Lens::EventFormatter.new(event, records) }
 
-  describe "#format" do
-    subject { formatter.format }
+  describe "#formatted" do
+    subject { formatter.formatted }
 
     it "returns hash" do
       expect(subject).to be_a(Hash)

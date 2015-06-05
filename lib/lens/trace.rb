@@ -1,16 +1,6 @@
 require 'rails'
 
 module Lens
-  class << Trace
-    def current
-      Thread.current[:__lens_trace]
-    end
-
-    def create(id)
-      Thread.current[:__lens_trace] = new(id)
-    end
-  end
-
   class Trace
     def initialize(id)
       @id = id
@@ -22,7 +12,7 @@ module Lens
     end
 
     def complete(event)
-      formatted_data = Lens::EventFormatter.new(event, @data).format
+      formatted_data = Lens::EventFormatter.new(event, @data).json_formatted
       log(data)
       send(data)
       Thread.current[:__lens_trace] = nil
@@ -41,6 +31,16 @@ module Lens
 
     def verbose?
       true
+    end
+  end
+
+  class << Trace
+    def current
+      Thread.current[:__lens_trace]
+    end
+
+    def create(id)
+      Thread.current[:__lens_trace] = new(id)
     end
   end
 end

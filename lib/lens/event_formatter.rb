@@ -5,8 +5,12 @@ module Lens
       @records = records
     end
 
-    def format
-      { data: event_data }
+    def json_formatted
+      formatted.to_json
+    end
+
+    def formatted
+      @formatted ||= { data: event_data }
     end
 
   private
