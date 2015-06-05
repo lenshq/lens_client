@@ -18,12 +18,6 @@ module Lens
       Trace.current.add(event)
     end
 
-    ActiveSupport::Notifications.subscribe('net_http.request') do |*args|
-      next unless Trace.current
-      event = ActiveSupport::Notifications::Event.new(*args)
-      Trace.current.add(event)
-    end
-
     ActiveSupport::Notifications.subscribe('process_action.action_controller') do |*args|
       next unless Trace.current
       event = ActiveSupport::Notifications::Event.new(*args)
