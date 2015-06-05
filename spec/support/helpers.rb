@@ -17,7 +17,7 @@ module Helpers
   def reset_config
     Lens.configuration = nil
     Lens.configure do |config|
-      config.app_id = 'app_key_123'
+      config.app_key = 'app_key_123'
       config.secret = 'abc123'
     end
   end

@@ -1,6 +1,6 @@
 module Lens
   class Configuration
-    attr_accessor :app_id, :secret, :protocol, :host, :port
+    attr_accessor :app_key, :secret, :protocol, :host, :port
 
     def protocol
       @protocol || default_protocol

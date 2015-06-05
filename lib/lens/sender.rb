@@ -13,8 +13,7 @@ module Lens
                    Errno::ECONNREFUSED].freeze
 
     def initialize(options = {})
-      [ :app_id,
-        :secret,
+      [ :app_key,
         :protocol,
         :host,
         :port
@@ -27,8 +26,7 @@ module Lens
       response = send_request(url.path, data, {'X-API-Key' => secret})
     end
 
-    attr_reader :app_id,
-      :secret,
+    attr_reader :app_key,
       :protocol,
       :host,
       :port
@@ -56,7 +54,7 @@ module Lens
     def http_headers(headers=nil)
       {}.tap do |hash|
         hash.merge!(HEADERS)
-        hash.merge!({'X-API-Key' => secret})
+        hash.merge!({'X-Auth-Token' => app_key})
         hash.merge!(headers) if headers
       end
     end
