@@ -20,7 +20,7 @@ module Lens
     end
 
     def complete(event)
-      formatted_data = Lens::Formatter.new(event, @data).format
+      formatted_data = Lens::EventFormatter.new(event, @data).format
       Rails.logger.info "all [LENS] >>> #{formatted_data}"
       Lens.sender.send_to_lens(formatted_data)
       Thread.current[:__lens_trace] = nil

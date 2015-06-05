@@ -1,6 +1,6 @@
 module Lens
   class EventFormatter
-    def initializer(event, records)
+    def initialize(event, records)
       @event = event
       @records = records
     end
