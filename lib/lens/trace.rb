@@ -2,8 +2,6 @@ require 'rails'
 
 module Lens
   class Trace
-    attr_reader :id, :duration
-
     def self.current
       Thread.current[:__lens_trace]
     end
@@ -14,19 +12,33 @@ module Lens
 
     def initialize(id)
       @id = id
-      @events = []
-      @duration = 0
+      @data = []
     end
 
     def add(event)
-      @events.push event
+      @data.push event.payload
     end
 
     def complete(event)
-      @duration = event.duration
-      Rails.logger.info "all [LENS] >>> #{@events}"
-      Rails.logger.info "last [LENS] >>> #{event}"
+      formatted_data = format(event, @data)
+      Rails.logger.info "all [LENS] >>> #{formatted_data}"
       Thread.current[:__lens_trace] = nil
+    end
+
+    def format(complete_event, records)
+      payload = complete_event.payload
+      {
+        action: payload[:action],
+        controller: payload[:controller],
+        params: payload[:params],
+        method: payload[:method],
+        url: payload[:path],
+        records: records,
+        duration: complete_event.duration,
+        meta: {
+          client_version: VERSION
+        }
+      }
     end
   end
 end
