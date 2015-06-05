@@ -29,7 +29,10 @@ module Lens
         url: event_payload[:path],
         records: @records,
         time: Time.now,
+        start: @event.time.to_f,
+        end: @event.end.to_f,
         duration: @event.duration,
+        event_name: @event.name,
         meta: {
           client_version: VERSION
         }
