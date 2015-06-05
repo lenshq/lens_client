@@ -3,7 +3,7 @@ module Lens
     attr_accessor :app_id, :secret, :protocol, :host, :port
 
     def protocol
-      'https'
+      @protocol || default_protocol
     end
 
     def host
@@ -20,6 +20,10 @@ module Lens
 
     def default_host
       'lens.coub.com'
+    end
+
+    def default_protocol
+      'https'
     end
   end
 end
