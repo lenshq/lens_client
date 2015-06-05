@@ -29,16 +29,19 @@ module Lens
     def format(complete_event, records)
       payload = complete_event.payload
       {
-        action: payload[:action],
-        controller: payload[:controller],
-        params: payload[:params],
-        method: payload[:method],
-        url: payload[:path],
-        records: records,
-        duration: complete_event.duration,
-        meta: {
-          client_version: VERSION
-        }
+        data:
+          {
+            action: payload[:action],
+            controller: payload[:controller],
+            params: payload[:params],
+            method: payload[:method],
+            url: payload[:path],
+            records: records,
+            duration: complete_event.duration,
+            meta: {
+              client_version: VERSION
+            }
+          }
       }
     end
   end
