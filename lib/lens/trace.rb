@@ -20,29 +20,10 @@ module Lens
     end
 
     def complete(event)
-      formatted_data = format(event, @data)
+      formatted_data = LensFormatter.new(event, @data).format
       Rails.logger.info "all [LENS] >>> #{formatted_data}"
       Lens.sender.send_to_lens(formatted_data)
       Thread.current[:__lens_trace] = nil
-    end
-
-    def format(complete_event, records)
-      payload = complete_event.payload
-      {
-        data:
-          {
-            action: payload[:action],
-            controller: payload[:controller],
-            params: payload[:params],
-            method: payload[:method],
-            url: payload[:path],
-            records: records,
-            duration: complete_event.duration,
-            meta: {
-              client_version: VERSION
-            }
-          }
-      }
     end
   end
 end
