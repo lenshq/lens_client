@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lens (0.0.2)
+    lens (0.0.4)
 
 GEM
   remote: https://rubygems.org/
