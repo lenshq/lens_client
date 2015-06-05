@@ -23,7 +23,7 @@ module Lens
     end
 
     def send_to_lens(data)
-      response = send_request(url.path, data, {'X-API-Key' => secret})
+      response = send_request(url.path, data)
     end
 
     attr_reader :app_key,
