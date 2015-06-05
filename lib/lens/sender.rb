@@ -46,7 +46,7 @@ module Lens
     end
 
     def send_request(path, data, headers = {})
-      http_connection.post(path, data.to_json, http_headers(headers))
+      http_connection.post(path, data, http_headers(headers))
     rescue *HTTP_ERRORS => e
       raise e
       nil
