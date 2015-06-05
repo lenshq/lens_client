@@ -3,7 +3,7 @@ require 'json'
 
 module Lens
   class Sender
-    NOTICES_URI = 'api/v1/record'
+    NOTICES_URI = 'api/v1/data/rec'
     HTTP_ERRORS = [Timeout::Error,
                    Errno::EINVAL,
                    Errno::ECONNRESET,
