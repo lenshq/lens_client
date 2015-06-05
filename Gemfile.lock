@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lens (0.0.1)
+    lens (0.0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -67,7 +67,7 @@ GEM
       activesupport (= 4.0.3)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.3.2)
+    rake (0.9.6)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -106,7 +106,7 @@ DEPENDENCIES
   bundler (~> 1.6)
   lens!
   pry (~> 0.10)
-  pry-nav
+  pry-nav (~> 0)
   rails (>= 3.0)
-  rake
-  rspec (~> 3.2.0)
+  rake (~> 0)
+  rspec (~> 3.2)

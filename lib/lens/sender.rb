@@ -42,7 +42,7 @@ module Lens
     def setup_http_connection
       Net::HTTP.new(url.host, url.port)
     rescue => e
-      log(:error, "[Honeybadger::Sender#setup_http_connection] Failure initializing the HTTP connection.\nError: #{e.class} - #{e.message}\nBacktrace:\n#{e.backtrace.join("\n\t")}")
+      log(:error, "[Lens::Sender#setup_http_connection] Failure initializing the HTTP connection.\nError: #{e.class} - #{e.message}\nBacktrace:\n#{e.backtrace.join("\n\t")}")
       raise e
     end
 
