@@ -5,6 +5,12 @@ module Lens
       @records = records
     end
 
+    def format
+      { data: event_data }
+    end
+
+  private
+
     def event_payload
       @event_payload ||= @event.payload
     end
@@ -22,12 +28,6 @@ module Lens
         meta: {
           client_version: VERSION
         }
-      }
-    end
-
-    def format
-      {
-        data: event_data
       }
     end
   end
