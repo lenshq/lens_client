@@ -19,5 +19,10 @@ describe Lens::EventFormatter do
     it "data key is not empty" do
       expect(subject[:data]).to_not be_empty
     end
+
+    it "required fields are present" do
+      required_keys = [:action, :controller, :params, :method, :url, :records, :time, :duration]
+      expect(required_keys - subject[:data].keys).to be_empty
+    end
   end
 end
