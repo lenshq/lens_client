@@ -12,7 +12,7 @@ module Lens
       Trace.current.add(event) if event.name != 'SCHEMA'
     end
 
-    ActiveSupport::Notifications.subscribe(/^render_(template|action|collection)\.action_view/) do |*args|
+    ActiveSupport::Notifications.subscribe(/^render_(template|action|collection|partial)\.action_view/) do |*args|
       next unless Trace.current
       event = ActiveSupport::Notifications::Event.new(*args)
       Trace.current.add(event)
