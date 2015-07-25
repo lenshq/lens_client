@@ -8,7 +8,12 @@ module Lens
     end
 
     def add(event)
-      @data.push event.payload.merge(name: event.name, duration: event.duration)
+      @data.push event.payload.merge(
+        etype: event.name,
+        eduration: event.duration,
+        estart: event.time,
+        efinish: event.end
+      )
     end
 
     def complete(event)
@@ -35,6 +40,27 @@ module Lens
   end
 
   class << Trace
+    def process(*args)
+      name, _started, _finished, id, _data = [*args]
+
+      if name == 'start_processing.action_controller'
+        create(id)
+      else
+        return if Trace.current.blank?
+
+        event = ActiveSupport::Notifications::Event.new(*args)
+
+        case name
+        when 'sql.active_record'
+          Trace.current.add(event) #if event.payload[:name] != 'SCHEMA'
+        when 'process_action.action_controller'
+          Trace.current.complete(event) if event.payload[:controller] && event.payload[:action]
+        else
+          Trace.current.add(event)
+        end
+      end
+    end
+
     def current
       Thread.current[:__lens_trace]
     end
