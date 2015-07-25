@@ -6,7 +6,7 @@ module Lens
     'Content-type' => 'application/json',
     'Content-Encoding' => 'deflate',
     'Accept'       => 'text/json, application/json',
-    'User-Agent'   => "LENS-Ruby #{VERSION}; #{RUBY_VERSION}; #{RUBY_PLATFORM}"
+    'User-Agent'   => "LENS-Ruby client #{VERSION}; #{RUBY_VERSION}; #{RUBY_PLATFORM}"
   }.freeze
 
   class << self
