@@ -37,6 +37,7 @@ GEM
     erubis (2.7.0)
     hike (1.2.3)
     i18n (0.6.11)
+    json (1.8.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -44,6 +45,8 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.11.0)
+    pg_query (0.5.0)
+      json (~> 1.8)
     polyglot (0.3.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -105,8 +108,12 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.6)
   lens!
+  pg_query
   pry (~> 0.10)
   pry-nav (~> 0)
   rails (>= 3.0)
   rake (~> 0)
   rspec (~> 3.2)
+
+BUNDLED WITH
+   1.10.5

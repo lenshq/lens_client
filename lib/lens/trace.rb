@@ -1,4 +1,5 @@
 require 'rails'
+require 'pg_query'
 
 module Lens
   class Trace
@@ -8,7 +9,13 @@ module Lens
     end
 
     def add(event)
-      @data.push event.payload.merge(name: event.name, duration: event.duration)
+      data = event.payload.merge(name: event.name, duration: event.duration)
+
+      if event.payload.key?(:sql)
+        data.merge!(parsed_sql: PgQuery.parse(event.payload[:sql]))
+      end
+
+      @data.push data 
     end
 
     def complete(event)
