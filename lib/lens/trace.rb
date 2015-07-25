@@ -11,8 +11,8 @@ module Lens
       @data.push event.payload.merge(
         etype: event.name,
         eduration: event.duration,
-        estart: event.time,
-        efinish: event.end
+        estart: event.time.to_f,
+        efinish: event.end.to_f
       )
     end
 
