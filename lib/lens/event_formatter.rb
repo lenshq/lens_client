@@ -34,7 +34,8 @@ module Lens
         duration: @event.duration,
         event_name: @event.name,
         meta: {
-          client_version: VERSION
+          client_version: VERSION,
+          rails_version: ::Rails.version
         }
       }
     end
