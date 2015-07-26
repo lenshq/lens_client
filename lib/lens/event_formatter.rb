@@ -1,8 +1,9 @@
 module Lens
   class EventFormatter
-    def initialize(event, records)
+    def initialize(event, records, gc_time = 0.0)
       @event = event
       @records = records
+      @gc_time = 0.0
     end
 
     def json_formatted
@@ -32,6 +33,7 @@ module Lens
         start: @event.time.to_f,
         end: @event.end.to_f,
         duration: @event.duration,
+        gc_time: @gc_time,
         event_name: @event.name,
         meta: {
           client_version: VERSION,

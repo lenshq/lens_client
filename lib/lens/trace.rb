@@ -5,6 +5,9 @@ module Lens
     def initialize(id)
       @id = id
       @data = []
+
+      @gc_statistics = Lens::GC.new
+      @gc_statistics.enable
     end
 
     def add(event)
@@ -17,7 +20,7 @@ module Lens
     end
 
     def complete(event)
-      formatted_data = Lens::EventFormatter.new(event, @data).json_formatted
+      formatted_data = Lens::EventFormatter.new(event, @data, @gc_statistics.total_time).json_formatted
       log(formatted_data)
       send(formatted_data)
       Thread.current[:__lens_trace] = nil
