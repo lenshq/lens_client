@@ -1,5 +1,7 @@
 # Lens
 
+[![Build Status](https://travis-ci.org/lenshq/lens_client.svg?branch=master)](https://travis-ci.org/lenshq/lens_client)
+
 TODO: Write a gem description
 
 ## Installation
