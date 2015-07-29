@@ -53,10 +53,7 @@ module Lens
 
         event = ActiveSupport::Notifications::Event.new(*args)
 
-        case name
-        when 'sql.active_record'
-          Trace.current.add(event) #if event.payload[:name] != 'SCHEMA'
-        when 'process_action.action_controller'
+        if name == 'process_action.action_controller'
           Trace.current.complete(event) if event.payload[:controller] && event.payload[:action]
         else
           Trace.current.add(event)
