@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 describe Lens::EventFormatter do
-  let(:event) { double(payload: {}, duration: 2.33) }
+  let(:event) { double(
+    payload: {},
+    duration: 2.33,
+    time: Time.now - 2.seconds,
+    end: Time.now,
+    name: 'dummy.name')
+  }
   let(:records) { [] }
   let(:formatter) { Lens::EventFormatter.new(event, records) }
 
