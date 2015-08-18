@@ -38,7 +38,7 @@ module Lens
     end
 
     def verbose?
-      true
+      false
     end
   end
 
