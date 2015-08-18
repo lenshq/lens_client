@@ -1,5 +1,4 @@
 require "lens/core"
-require 'pry'
 
 module Lens
   HEADERS = {
