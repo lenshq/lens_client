@@ -19,11 +19,11 @@ module Lens
     end
 
     def default_host
-      'lens.coub.com'
+      'lens.staging.coub.com'
     end
 
     def default_protocol
-      'https'
+      'http'
     end
   end
 end
