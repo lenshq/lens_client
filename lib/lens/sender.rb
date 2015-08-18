@@ -3,7 +3,7 @@ require 'json'
 
 module Lens
   class Sender
-    NOTICES_URI = 'api/v1/data/rec'
+    NOTICES_URI = 'api/v1/events'
     HTTP_ERRORS = [Timeout::Error,
                    Errno::EINVAL,
                    Errno::ECONNRESET,
@@ -24,7 +24,7 @@ module Lens
     end
 
     def send_to_lens(data)
-      response = send_request(url.path, data)
+      send_request(url.path, data)
     end
 
     attr_reader :app_key,
