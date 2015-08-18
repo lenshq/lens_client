@@ -45,18 +45,17 @@ module Lens
   class << Trace
     def process(*args)
       name, _started, _finished, id, _data = [*args]
+      event = ActiveSupport::Notifications::Event.new(*args)
 
       if name == 'start_processing.action_controller'
         create(id)
+        Trace.current.add(event)
       else
         return if Trace.current.blank?
 
-        event = ActiveSupport::Notifications::Event.new(*args)
-
+        Trace.current.add(event)
         if name == 'process_action.action_controller'
           Trace.current.complete(event) if event.payload[:controller] && event.payload[:action]
-        else
-          Trace.current.add(event)
         end
       end
     end
