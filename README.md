@@ -10,7 +10,7 @@ gem 'lens'
 OR
 
 ```ruby
-gem 'lens', github: lenshq/lens_client
+gem 'lens', github: 'lenshq/lens_client'
 ```
 
 ```ruby
