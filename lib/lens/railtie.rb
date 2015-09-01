@@ -5,5 +5,7 @@ module Lens
     ActiveSupport::Notifications.subscribe(/.*/) do |*args|
       Trace.process(*args)
     end
+
+    Lens.start
   end
 end

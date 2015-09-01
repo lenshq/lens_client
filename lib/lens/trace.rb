@@ -30,7 +30,7 @@ module Lens
 
     def send(data)
       log(data)
-      Lens.sender.send_to_lens(data)
+      Worker.instance.push(data)
     end
 
     def log(data)

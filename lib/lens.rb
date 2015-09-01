@@ -22,5 +22,17 @@ module Lens
     def configuration
       @configuration ||= Configuration.new
     end
+
+    def start
+      Worker.start(configuration)
+    end
+
+    def stop
+      Worker.stop
+    end
+  end
+
+  if defined?(Rails)
+    require "lens/railtie"
   end
 end
