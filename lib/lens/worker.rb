@@ -137,9 +137,10 @@ module Lens
 
       true
     end
-  end
 
-  def log(message)
-    puts "\n\n\n[LENS]: #{message} \n"
+    def log(message)
+      puts "\n\n\n[LENS]: #{message} \n"
+    end
+
   end
 end
