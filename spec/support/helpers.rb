@@ -1,7 +1,7 @@
 module Helpers
   def stub_http(options = {})
     response = options[:response] || Net::HTTPSuccess.new('1.2', '200', 'OK')
-    response.stub(:body => options[:body] || '{"id":"1234"}')
+    allow(response).to receive(:body).with(options[:body] || '{"id":"1234"}')
     http = double(
       :post          => response,
       :read_timeout= => nil,
@@ -10,7 +10,7 @@ module Helpers
       :verify_mode=  => nil,
       :use_ssl=      => nil
     )
-    Net::HTTP.stub(:new).and_return(http)
+    allow(Net::HTTP).to receive(:new).and_return(http)
     http
   end
 
