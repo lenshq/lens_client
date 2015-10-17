@@ -3,6 +3,26 @@ require 'json'
 require_relative 'gzip_util'
 
 module Lens
+  module GzipCompressor
+    def self.compress(data)
+      GzipUtil.gzip(data)
+    end
+
+    def self.headers
+      {'Content-Encoding' =>'gzip'}
+    end
+  end
+
+  module VoidCompressor
+    def self.compress(data)
+      data
+    end
+
+    def self.headers
+      {}
+    end
+  end
+
   class Sender
     NOTICES_URI = 'api/v1/events'
     HTTP_ERRORS = [Timeout::Error,
@@ -24,8 +44,8 @@ module Lens
       end
     end
 
-    def send_to_lens(data)
-      send_request(url.path, data)
+    def send_to_lens(data, compressor = VoidCompressor)
+      send_request(url.path, compressor.compress(data), compressor.headers)
     end
 
     attr_reader :app_key,
@@ -47,7 +67,7 @@ module Lens
     end
 
     def send_request(path, data, headers = {})
-      http_connection.post(path, GzipUtil.gzip(data), http_headers(headers))
+      http_connection.post(path, data, http_headers(headers))
     rescue *HTTP_ERRORS => e
       raise e
       nil
@@ -58,7 +78,6 @@ module Lens
         hash.merge!(HEADERS)
         hash.merge!({'X-Auth-Token' => app_key})
         hash.merge!({'Content-Type' =>'application/json'})
-        hash.merge!({'Content-Encoding' =>'gzip'})
         hash.merge!(headers) if headers
       end
     end
