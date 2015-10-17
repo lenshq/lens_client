@@ -46,7 +46,7 @@ module Lens
     end
 
     def send_request(path, data, headers = {})
-      http_connection.post(path, data, http_headers(headers))
+      http_connection.post(path, GzipUtil.gzip(data), http_headers(headers))
     rescue *HTTP_ERRORS => e
       raise e
       nil
@@ -57,6 +57,7 @@ module Lens
         hash.merge!(HEADERS)
         hash.merge!({'X-Auth-Token' => app_key})
         hash.merge!({'Content-Type' =>'application/json'})
+        hash.merge!({'Content-Encoding' =>'gzip'})
         hash.merge!(headers) if headers
       end
     end
