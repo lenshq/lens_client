@@ -1,5 +1,6 @@
 require 'pry'
 require 'json'
+require_relative 'gzip_util'
 
 module Lens
   class Sender
