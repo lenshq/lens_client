@@ -91,7 +91,7 @@ I, [2014-04-09T08:49:12.353619 #71649]  INFO -- : Completed in 251ms (View: 192,
 I, [2014-04-09T08:50:31.914692 #71649]  INFO -- :
 LOG
 
-compressors = [Lens::Compression::Gzip]
+compressors = [Lens::Compression::Gzip, Lens::Compression::Bson]
 
 results = compressors.map do |compressor|
   compressed = compressor.compress(data)

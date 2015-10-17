@@ -1,3 +1,5 @@
+require 'bson'
+
 module Lens
   module Compression
     module Gzip
@@ -13,6 +15,16 @@ module Lens
     module Void
       def self.compress(data)
         data
+      end
+
+      def self.headers
+        {}
+      end
+    end
+
+    module Bson
+      def self.compress(data)
+        data.to_bson
       end
 
       def self.headers
