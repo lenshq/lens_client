@@ -1,28 +1,7 @@
 require 'pry'
 require 'json'
-require_relative 'gzip_util'
 
 module Lens
-  module GzipCompressor
-    def self.compress(data)
-      GzipUtil.gzip(data)
-    end
-
-    def self.headers
-      {'Content-Encoding' =>'gzip'}
-    end
-  end
-
-  module VoidCompressor
-    def self.compress(data)
-      data
-    end
-
-    def self.headers
-      {}
-    end
-  end
-
   class Sender
     NOTICES_URI = 'api/v1/events'
     HTTP_ERRORS = [Timeout::Error,
@@ -44,7 +23,7 @@ module Lens
       end
     end
 
-    def send_to_lens(data, compressor = VoidCompressor)
+    def send_to_lens(data, compressor = Compression::Void)
       send_request(url.path, compressor.compress(data), compressor.headers)
     end
 
