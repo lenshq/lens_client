@@ -1,6 +1,6 @@
 module Lens
   class EventFormatter
-    def initialize(event, records, allocations_data, gc_time = 0.0)
+    def initialize(event, records, gc_time = 0.0, allocations_data = Lens::AllocationsDataNone.new)
       @event = event
       @records = records.map{|payload| filter_payload(payload)}
       @gc_time = 0.0

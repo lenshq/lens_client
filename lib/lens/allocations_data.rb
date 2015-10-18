@@ -1,7 +1,13 @@
 require 'objspace'
 
 module Lens
-  class AllocationsData
+  module AllocationsData
+    def self.retrieve
+      AllocationsDataMRI.new
+    end
+  end
+
+  class AllocationsDataMRI
     attr_reader :objects_count, :objects_memory
 
     def initialize
@@ -18,6 +24,15 @@ module Lens
 
     def get_memory
       ObjectSpace.count_objects_size[:TOTAL]
+    end
+  end
+
+  class AllocationsDataNone
+    attr_reader :objects_count, :objects_memory
+
+    def initialize
+      @objects_count  = 0
+      @objects_memory = 0
     end
   end
 end
