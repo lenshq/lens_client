@@ -14,12 +14,12 @@ module Lens
       end
 
       def objects_count
-        @objects_count ||= get_count if @enabled
+        @objects_count = get_count if @enabled
         @objects_count
       end
 
       def objects_memory
-        @objects_memory ||= get_memory if @enabled
+        @objects_memory = get_memory if @enabled
         @objects_memory
       end
 
@@ -44,6 +44,8 @@ module Lens
         @objects_count  = 0
         @objects_memory = 0
       end
+
+      def enable; end
     end
   end
 end
