@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/lenshq/lens_client.svg?branch=master)](https://travis-ci.org/lenshq/lens_client)
+[![Code Climate](https://codeclimate.com/github/lenshq/lens_client/badges/gpa.svg)](https://codeclimate.com/github/lenshq/lens_client)
 
 # lenshq ruby gem
 
