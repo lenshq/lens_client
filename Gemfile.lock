@@ -32,6 +32,7 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    beefcake (1.1.0)
     bson (3.2.6)
     builder (3.1.4)
     coderay (1.1.0)
@@ -141,6 +142,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  beefcake
   bundler (~> 1.6)
   lens!
   pry (~> 0.10)
