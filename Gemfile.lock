@@ -34,9 +34,11 @@ GEM
     builder (3.1.4)
     coderay (1.1.0)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     erubis (2.7.0)
     hike (1.2.3)
     i18n (0.6.11)
+    json (1.8.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -81,6 +83,11 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.2.0)
     rspec-support (3.2.2)
+    simplecov (0.10.0)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     slop (3.6.0)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -110,6 +117,7 @@ DEPENDENCIES
   rails (>= 3.0)
   rake (~> 0)
   rspec (~> 3.2)
+  simplecov
 
 BUNDLED WITH
-   1.10.4
+   1.10.6
