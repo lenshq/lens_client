@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     lens (0.0.6)
+      bson (~> 3.2)
 
 GEM
   remote: https://rubygems.org/
@@ -31,9 +32,12 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     arel (4.0.2)
+    beefcake (1.1.0)
+    bson (3.2.6)
     builder (3.1.4)
     coderay (1.1.0)
     diff-lcs (1.2.5)
+    equatable (0.5.0)
     erubis (2.7.0)
     hike (1.2.3)
     i18n (0.6.11)
@@ -44,6 +48,10 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.11.0)
+    necromancer (0.3.0)
+    pastel (0.5.1)
+      equatable (~> 0.5)
+      tty-screen (~> 0.4)
     polyglot (0.3.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -97,12 +105,44 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    tty (0.2.1)
+      equatable (~> 0.5.0)
+      necromancer (~> 0.3.0)
+      pastel (~> 0.5.1)
+      tty-pager (~> 0.3.0)
+      tty-platform (~> 0.1.0)
+      tty-progressbar (~> 0.7.0)
+      tty-screen (~> 0.4.0)
+      tty-spinner (~> 0.1.0)
+      tty-table (~> 0.4.0)
+      tty-which (~> 0.1.0)
+    tty-pager (0.3.0)
+      tty-screen (~> 0.4.0)
+      tty-which (~> 0.1.0)
+      verse (~> 0.4.0)
+    tty-platform (0.1.0)
+    tty-progressbar (0.7.0)
+      tty-screen (~> 0.4.0)
+    tty-screen (0.4.0)
+    tty-spinner (0.1.0)
+    tty-table (0.4.0)
+      equatable (~> 0.5.0)
+      necromancer (~> 0.3.0)
+      pastel (~> 0.5.1)
+      tty-screen (~> 0.4.0)
+      unicode_utils (~> 1.4.0)
+      verse (~> 0.4.0)
+    tty-which (0.1.0)
     tzinfo (0.3.42)
+    unicode_utils (1.4.0)
+    verse (0.4.0)
+      unicode_utils (~> 1.4.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  beefcake
   bundler (~> 1.6)
   lens!
   pry (~> 0.10)
@@ -110,6 +150,4 @@ DEPENDENCIES
   rails (>= 3.0)
   rake (~> 0)
   rspec (~> 3.2)
-
-BUNDLED WITH
-   1.10.4
+  tty (~> 0.2)

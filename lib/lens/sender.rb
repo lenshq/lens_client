@@ -23,8 +23,8 @@ module Lens
       end
     end
 
-    def send_to_lens(data)
-      send_request(url.path, data)
+    def send_to_lens(data, compressor = Compression::Void)
+      send_request(url.path, compressor.compress(data), compressor.headers)
     end
 
     attr_reader :app_key,

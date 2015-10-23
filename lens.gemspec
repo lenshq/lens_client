@@ -17,9 +17,12 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency 'bson', "~> 3.2"
+
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"   , '~> 0'
   spec.add_development_dependency 'rspec'  , '~> 3.2'
   spec.add_development_dependency "pry"    , '~> 0.10'
   spec.add_development_dependency "pry-nav", '~> 0'
+  spec.add_development_dependency "tty"    , '~> 0.2'
 end
