@@ -15,7 +15,7 @@ results = []
 datasets.each do |data|
   results += compressors.map do |compressor|
     compressed = compressor.compress(data)
-    [compressor.to_s, data.size, compressed.size, (100.0*compressed.size/data.size).round().to_s + "%" ,"#{data.to_s[0..60]}..."]
+    [compressor.to_s, data.size, compressed.size, (100.0*compressed.size/data.size).round(1).to_s + "%" ,"#{data.to_s[0..60]}..."]
   end
 end
 
