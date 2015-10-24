@@ -39,8 +39,14 @@ module Lens
   unless defined?(::Lens::AllocationsData)
     class AllocationsData
       def enable; end
-      def objects_count; 0; end
-      def objects_memory; 0; end
+
+      def objects_count
+        0
+      end
+
+      def objects_memory
+        0
+      end
     end
   end
 end

@@ -23,7 +23,13 @@ module Lens
     end
 
     def complete(event)
-      formatted_data = Lens::EventFormatter.new(event, @data, @gc_statistics.total_time, @allocations_data).json_formatted
+      formatter = Lens::EventFormatter.new(
+        event,
+        @data,
+        @gc_statistics.total_time,
+        @allocations_data
+      )
+      formatted_data = formatter.json_formatted
       send(formatted_data)
       Thread.current[:__lens_trace] = nil
     end
