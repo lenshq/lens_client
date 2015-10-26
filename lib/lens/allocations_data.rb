@@ -14,23 +14,23 @@ module Lens
       end
 
       def objects_count
-        @objects_count = get_count if @enabled
+        @objects_count = calculate_objects_count if @enabled
         @objects_count
       end
 
       def objects_memory
-        @objects_memory = get_memory if @enabled
+        @objects_memory = calculate_objects_memory if @enabled
         @objects_memory
       end
 
       private
 
-      def get_count
+      def calculate_objects_count
         obj_count = ObjectSpace.count_objects
         obj_count[:TOTAL] - obj_count[:FREE]
       end
 
-      def get_memory
+      def calculate_objects_memory
         ObjectSpace.count_objects_size[:TOTAL]
       end
     end
