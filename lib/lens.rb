@@ -1,4 +1,7 @@
-require "lens/core"
+raise 'WTF!?!?! Where is Rails man?' if !defined?(Rails)
+
+require 'lens/core'
+require 'lens/railtie'
 
 module Lens
   HEADERS = {
@@ -32,9 +35,5 @@ module Lens
     def stop
       Worker.stop
     end
-  end
-
-  if defined?(Rails)
-    require "lens/railtie"
   end
 end
