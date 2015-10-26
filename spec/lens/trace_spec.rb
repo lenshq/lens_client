@@ -2,30 +2,8 @@ require 'spec_helper'
 
 RSpec.describe Lens::Trace do
   describe '.process' do
-    let(:first_event) do
-      [
-        'start_processing.action_controller',
-        Time.current,
-        Time.current,
-        1,
-        {
-          controller: 'controller',
-          action: 'action'
-        }
-      ]
-    end
-    let(:last_event) do
-      [
-        'process_action.action_controller',
-        Time.current,
-        Time.current,
-        1,
-        {
-          controller: 'controller',
-          action: 'action'
-        }
-      ]
-    end
+    let(:first_event) { generate_event('start_processing.action_controller') }
+    let(:last_event) { generate_event('process_action.action_controller') }
 
     context 'when first message' do
       before { described_class.process(*first_event) }
@@ -56,4 +34,17 @@ RSpec.describe Lens::Trace do
       end
     end
   end
+end
+
+def generate_event(name = 'name')
+  [
+    name,
+    Time.current,
+    Time.current,
+    rand(100),
+    {
+      controller: 'controller',
+      action: 'action'
+    }
+  ]
 end
