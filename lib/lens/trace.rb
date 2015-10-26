@@ -39,10 +39,14 @@ module Lens
 
       create(id) if first_event?(event)
 
-      if Trace.current.present?
-        Trace.current.add(event)
-        Trace.current.complete(event) if last_event?(event)
+      if Trace.present?
+        current.add(event)
+        current.complete(event) if last_event?(event)
       end
+    end
+
+    def present?
+      current.present?
     end
 
     private
