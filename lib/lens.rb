@@ -15,6 +15,8 @@ module Lens
     def configure
       yield(configuration)
 
+      Lens.start
+
       self.sender = Sender.new(configuration)
       self.sender
     end
@@ -22,5 +24,17 @@ module Lens
     def configuration
       @configuration ||= Configuration.new
     end
+
+    def start
+      Worker.start(configuration)
+    end
+
+    def stop
+      Worker.stop
+    end
+  end
+
+  if defined?(Rails)
+    require "lens/railtie"
   end
 end
