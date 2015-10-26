@@ -45,7 +45,7 @@ module Lens
   class << Trace
     def process(*args)
       name, _started, _finished, id, _data = [*args]
-      event = ActiveSupport::Notifications::Event.new(*args)
+      event = Struct.new(*args)
 
       if name == 'start_processing.action_controller'
         create(id)
