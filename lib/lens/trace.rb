@@ -41,10 +41,16 @@ module Lens
     end
   end
 
+  Event = Struct.new(:name, :time, :end, :transaction_id, :payload) do
+    def duration
+      1000.0 * (self.end - time)
+    end
+  end
+
   class << Trace
     def process(*args)
       _name, _started, _finished, id, _data = args
-      event = ActiveSupport::Notifications::Event.new(*args)
+      event = Event.new(*args)
 
       create(id) if first_event?(event)
 
