@@ -10,7 +10,7 @@ module Lens
       end
 
       def push(obj)
-        super unless size == max_size
+        super unless size >= max_size
       end
     end
 
@@ -65,7 +65,6 @@ module Lens
 
     def run
       begin
-        log('worker started')
         loop do
           case msg = queue.pop
           when SHUTDOWN
@@ -74,27 +73,22 @@ module Lens
             process(msg)
           end
         end
-      ensure
-        log('stopping worker')
       end
     rescue Exception => e
-      log "error in worker thread (shutting down)"
     end
 
     def process(msg)
-      log "processing #{msg.truncate(50)}"
       handle_response(notify_backend(msg))
     rescue StandardError => e
-      log "error in worker thread"
       sleep(1)
     end
 
     def notify_backend(payload)
-      log "SENDING TO LENS"
       Lens.sender.send_to_lens(payload)
     end
 
     def handle_response(response)
+      # TODO: send message back to queue if response status != 200
       log "handle_response #{response.code}"
     end
 
@@ -128,8 +122,6 @@ module Lens
         @pid = nil
       end
 
-      log('killing worker thread')
-
       if thread
         Thread.kill(thread)
         thread.join # Allow ensure blocks to execute.
@@ -137,10 +129,5 @@ module Lens
 
       true
     end
-
-    def log(message)
-      puts "\n\n\n[LENS]: #{message} \n"
-    end
-
   end
 end

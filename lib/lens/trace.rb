@@ -21,43 +21,40 @@ module Lens
 
     def complete(event)
       formatted_data = Lens::EventFormatter.new(event, @data, @gc_statistics.total_time).json_formatted
-      log(formatted_data)
       send(formatted_data)
       Thread.current[:__lens_trace] = nil
     end
 
-  private
+    private
 
     def send(data)
-      log(data)
       Worker.instance.push(data)
-    end
-
-    def log(data)
-      Rails.logger.info "all [LENS] >>> #{data}" if verbose?
-    end
-
-    def verbose?
-      false
     end
   end
 
   class << Trace
     def process(*args)
-      name, _started, _finished, id, _data = [*args]
+      _name, _started, _finished, id, _data = args
       event = ActiveSupport::Notifications::Event.new(*args)
 
-      if name == 'start_processing.action_controller'
-        create(id)
-        Trace.current.add(event)
-      else
-        return if Trace.current.blank?
+      create(id) if first_event?(event)
 
+      if Trace.current.present?
         Trace.current.add(event)
-        if name == 'process_action.action_controller'
-          Trace.current.complete(event) if event.payload[:controller] && event.payload[:action]
-        end
+        Trace.current.complete(event) if last_event?(event)
       end
+    end
+
+    private
+
+    def first_event?(event)
+      event.name == 'start_processing.action_controller'
+    end
+
+    def last_event?(event)
+      event.name == 'process_action.action_controller' &&
+        event.payload[:controller] &&
+        event.payload[:action]
     end
 
     def current
