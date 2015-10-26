@@ -1,5 +1,22 @@
 language: ruby
+cache: bundler
+sudo: false
 rvm:
-  - "1.9.3"
-  - "2.2.2"
+  - 1.9.3
+  - 2.0.0
+  - 2.1.0
+  - 2.2.2
+  - 2.2.3
+  - ruby-head
+  - jruby-19mode
+  - jruby-head
+  - rbx-2
+env:
+  global:
+    - JRUBY_OPTS="-J-Xmx1024M --debug"
+matrix:
+  allow_failures:
+    - rvm: jruby-19mode
+    - rvm: jruby-head
+    - rvm: rbx-2
 script: bundle exec rspec spec
