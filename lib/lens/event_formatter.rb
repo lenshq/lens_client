@@ -1,9 +1,10 @@
 module Lens
   class EventFormatter
-    def initialize(event, records, gc_time = 0.0)
+    def initialize(event, records, gc_time = 0.0, allocations_data = Lens::AllocationsData.new)
       @event = event
       @records = records.map{|payload| filter_payload(payload)}
-      @gc_time = 0.0
+      @gc_time = gc_time
+      @allocations_data = allocations_data
     end
 
     def json_formatted
@@ -38,7 +39,9 @@ module Lens
         meta: {
           client_version: VERSION,
           rails_version: ::Rails.version
-        }
+        },
+        objects_count: @allocations_data.objects_count,
+        objects_memory: @allocations_data.objects_memory
       }
     end
 
