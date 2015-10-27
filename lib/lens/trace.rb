@@ -42,11 +42,8 @@ module Lens
   end
 
   class << Trace
-    def process(*args)
-      _name, _started, _finished, id, _data = args
-      event = ActiveSupport::Notifications::Event.new(*args)
-
-      create(id) if first_event?(event)
+    def process(event)
+      create(event.transaction_id) if first_event?(event)
 
       if Trace.present?
         current.add(event)
