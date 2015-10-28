@@ -3,6 +3,11 @@ if ENV['COVERAGE']
   SimpleCov.start
 end
 
+if ENV['CI']
+  require 'codeclimate-test-reporter'
+  CodeClimate::TestReporter.start
+end
+
 require 'rspec'
 require 'lens'
 
