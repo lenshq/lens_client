@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
-gem 'rails', '>= 3.0'
+
+gemspec
 
 group :test do
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: false
 end
-
-gemspec

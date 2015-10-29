@@ -1,5 +1,3 @@
-require 'rails'
-
 module Lens
   class Railtie < Rails::Railtie
     ActiveSupport::Notifications.subscribe(/.*/) do |name, start, finish, id, payload|
