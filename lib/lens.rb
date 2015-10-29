@@ -1,4 +1,4 @@
-raise 'WTF!?!?! Where is Rails man?' if !defined?(Rails)
+raise 'WTF!?!?! Where is Rails man?' unless defined?(Rails)
 
 require 'lens/core'
 require 'lens/railtie'
