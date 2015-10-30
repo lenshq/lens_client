@@ -4,39 +4,34 @@ describe Lens::Worker do
   let(:worker) { Lens::Worker.new({}) }
 
   describe '.stop' do
-    before do
-      allow_any_instance_of(Lens::Worker).to receive method
-      Lens::Worker.start({})
-    end
+    before { Lens::Worker.start({}) }
 
     context 'when forced' do
-      let(:method) { :shutdown! }
-
       it 'calls forced stop' do
-        expect_any_instance_of(Lens::Worker).to receive method
-        Lens::Worker.stop(true)
+        expect_any_instance_of(Lens::Worker).to receive :shutdown!
+        Lens::Worker.stop(force: true)
       end
     end
 
     context 'when graceful' do
-      let(:method) { :shutdown }
-
       it 'calls graceful stop' do
-        expect_any_instance_of(Lens::Worker).to receive method
+        expect_any_instance_of(Lens::Worker).to receive :shutdown
         Lens::Worker.stop
       end
     end
   end
 
   describe '#process' do
+    let(:sender) { spy }
+
     before do
-      allow(Lens::Sender).to receive :send_to_lens
+      Lens.sender = sender
       worker.start
     end
 
     it 'sends data to lens' do
-      expect_any_instance_of(Lens::Sender).to receive :send_to_lens
       worker.process({})
+      expect(sender).to have_received :send_to_lens
     end
   end
 
@@ -62,7 +57,7 @@ describe Lens::Worker do
 end
 
 describe Lens::Worker::Queue do
-  let(:queue) { described_class.new(1) }
+  let(:queue) { described_class.new(max_size: 1) }
 
   describe '#push' do
     context 'when queue is full' do

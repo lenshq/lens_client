@@ -1,11 +1,14 @@
 module Lens
   class Worker
     # A queue which enforces a maximum size.
+    # NOTE: can be replaced with SizedQueue?
     class Queue < ::Queue
       attr_reader :max_size
 
-      def initialize(max_size)
-        @max_size = max_size
+      def initialize(options = {})
+        raise ArgumentError unless options[:max_size]
+
+        @max_size = options[:max_size]
         super()
       end
 
@@ -28,8 +31,8 @@ module Lens
         @instance = new(config)
       end
 
-      def stop(force = false)
-        @instance.send(force ? :shutdown! : :shutdown)
+      def stop(options = {})
+        @instance.send(options[:force] ? :shutdown! : :shutdown)
       end
     end
 
@@ -39,7 +42,7 @@ module Lens
 
     def initialize(config)
       @config = config
-      @queue = Queue.new(100)
+      @queue = Queue.new(max_size: 100)
       @mutex = Mutex.new
       @shutdown = false
       start
