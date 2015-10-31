@@ -32,7 +32,9 @@ module Lens
       end
 
       def stop(options = {})
-        @instance.send(options[:force] ? :shutdown! : :shutdown)
+        @instance.public_send(options[:force] ? :shutdown! : :shutdown) if running?
+      ensure
+        @instance = nil
       end
     end
 
