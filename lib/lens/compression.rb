@@ -6,7 +6,7 @@ module Lens
       end
 
       def self.headers
-        { 'Content-Encoding' => 'gzip' }
+        { 'Content-Type' => 'gzip/json' }
       end
     end
   end
