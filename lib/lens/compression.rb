@@ -9,15 +9,5 @@ module Lens
         { 'Content-Encoding' => 'gzip' }
       end
     end
-
-    module Void
-      def self.compress(data)
-        data
-      end
-
-      def self.headers
-        {}
-      end
-    end
   end
 end
