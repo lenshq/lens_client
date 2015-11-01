@@ -11,7 +11,7 @@ module Lens
       'User-Agent' => "LENS-Ruby client #{VERSION}; #{RUBY_VERSION}; #{RUBY_PLATFORM}"
     }.freeze
 
-    attr_reader :app_key, :protocol, :host, :port
+    attr_reader :app_key, :protocol, :host, :port, :compressor
 
     def initialize(options = nil)
       raise ArgumentError unless options.is_a? Configuration
@@ -20,9 +20,10 @@ module Lens
       @protocol = options.protocol
       @host = options.host
       @port = options.port
+      @compressor = options.compressor
     end
 
-    def send_to_lens(data, compressor = Compression::Void)
+    def send_to_lens(data)
       send_request(url.path, compressor.compress(data), compressor.headers)
     end
 

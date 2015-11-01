@@ -14,6 +14,12 @@ module Lens
       @port || default_port
     end
 
+    def compressor
+      default_compressor
+    end
+
+    private
+
     def default_port
       80
     end
@@ -24,6 +30,10 @@ module Lens
 
     def default_protocol
       'http'
+    end
+
+    def default_compressor
+      Compression::Gzip
     end
   end
 end
