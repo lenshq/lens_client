@@ -11,10 +11,8 @@ module Lens
     def configure
       yield(configuration)
 
-      Lens.start
-
       self.sender = Sender.new(configuration)
-      self.sender
+      self
     end
 
     def configuration
