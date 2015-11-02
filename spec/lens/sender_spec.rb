@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'support/helpers'
 
 describe Lens::Sender do
-  before { reset_config }
+  before { Lens.configure { |config| config.app_key = 'app_key_123' } }
   let(:http) { stub_http }
 
   it "makes a single request when sending notices" do

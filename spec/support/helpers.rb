@@ -13,12 +13,4 @@ module Helpers
     allow(Net::HTTP).to receive(:new).and_return(http)
     http
   end
-
-  def reset_config
-    Lens.configuration = nil
-    Lens.configure do |config|
-      config.app_key = 'app_key_123'
-      config.secret = 'abc123'
-    end
-  end
 end

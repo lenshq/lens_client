@@ -15,6 +15,10 @@ require 'lens'
 Dir[File.expand_path('../../spec/support/**/*.rb', __FILE__)].each {|f| require f}
 
 RSpec.configure do |config|
+  config.after :each do
+    Lens.configuration = nil
+  end
+
   config.mock_with :rspec
   config.color = true
   config.run_all_when_everything_filtered = true
