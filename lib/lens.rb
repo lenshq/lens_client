@@ -1,4 +1,6 @@
-raise 'WTF!?!?! Where is Rails man?' unless defined?(Rails)
+# encoding: utf-8
+
+raise 'WTF!?!?! Where is Rails man? ❨╯°□°❩╯︵┻━┻' unless defined?(Rails)
 
 require 'lens/core'
 require 'lens/railtie'
@@ -11,10 +13,8 @@ module Lens
     def configure
       yield(configuration)
 
-      Lens.start
-
       self.sender = Sender.new(configuration)
-      self.sender
+      self
     end
 
     def configuration
@@ -22,6 +22,8 @@ module Lens
     end
 
     def start
+      raise ConfigurationError, 'application key required' unless configuration.app_key
+
       Worker.start(configuration)
     end
 

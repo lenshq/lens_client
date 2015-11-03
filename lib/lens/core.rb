@@ -1,4 +1,5 @@
 require 'lens/version'
+require 'lens/exceptions'
 require 'lens/configuration'
 require 'lens/gzip_util'
 require 'lens/compression'

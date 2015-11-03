@@ -25,7 +25,7 @@ module Lens
     end
 
     def default_host
-      'lens.staging.coub.com'
+      'lenshq.io'
     end
 
     def default_protocol

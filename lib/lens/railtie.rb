@@ -11,5 +11,9 @@ module Lens
 
       Trace.process(event)
     end
+
+    config.after_initialize do
+      Lens.start
+    end
   end
 end
