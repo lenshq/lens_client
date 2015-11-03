@@ -41,17 +41,65 @@ describe Lens do
   end
 
   describe '.start' do
-    subject { described_class.start }
+    context 'without configuration' do
+      subject { described_class.start }
 
-    it { expect { subject }.to raise_error Lens::ConfigurationError }
+      it { expect { subject }.to raise_error Lens::ConfigurationError }
+    end
+
+    context 'with configuration' do
+      let(:params) { { app_key: 'some_key' } }
+
+      around(:example) do |example|
+        configure(params)
+        described_class.start
+
+        example.run
+
+        described_class.stop
+      end
+
+      it 'client has been started properly' do
+        expect(Lens::Worker.running?).to be_truthy
+      end
+    end
+  end
+
+  describe '.stop' do
+    context 'not running' do
+      it 'client has been stopped properly' do
+        expect(Lens::Worker.running?).to be_falsey
+        described_class.stop
+        expect(Lens::Worker.running?).to be_falsey
+      end
+    end
+
+    context 'running' do
+      let(:params) { { app_key: 'some_key' } }
+
+      around(:example) do |example|
+        configure(params)
+        described_class.start
+
+        example.run
+
+        described_class.stop
+      end
+
+      it 'client has been stopped properly' do
+        expect(Lens::Worker.running?).to be_truthy
+        described_class.stop
+        expect(Lens::Worker.running?).to be_falsey
+      end
+    end
   end
 end
 
 def configure(params)
   described_class.configure do |config|
-    config.app_key = params[:app_key]
-    config.protocol = params[:protocol]
-    config.host = params[:host]
-    config.port = params[:port]
+    config.app_key = params[:app_key] if params[:app_key].present?
+    config.protocol = params[:protocol] if params[:protocol].present?
+    config.host = params[:host] if params[:host].present?
+    config.port = params[:port] if params[:port].present?
   end
 end
