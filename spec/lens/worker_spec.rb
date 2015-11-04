@@ -90,6 +90,19 @@ describe Lens::Worker do
       expect(worker.thread.stop?).to be true
     end
   end
+
+  describe '.push' do
+    let(:sender) { spy }
+    subject { described_class.instance.queue.length }
+
+    before do
+      Lens.sender = sender
+      worker.start
+      2.times { described_class.instance.push({}) }
+    end
+
+    it { is_expected.to eq 2 }
+  end
 end
 
 describe Lens::Worker::Queue do
