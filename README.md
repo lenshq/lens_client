@@ -9,7 +9,7 @@
 Add to your Gemfile
 
 ```ruby
-gem 'lens', '~> 0.0.7'
+gem 'lens', '~> 0.0.8'
 ```
 
 or, if you want bleeding edge,
