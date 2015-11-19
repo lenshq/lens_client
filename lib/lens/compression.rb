@@ -1,5 +1,6 @@
 require 'bson'
 require 'beefcake'
+require 'lz4-ruby'
 
 module Lens
   module Compression
@@ -91,6 +92,26 @@ module Lens
 
       def self.headers
         {'Content-Encoding' =>'gzip'}
+      end
+    end
+
+    module LZ4
+      def self.compress(data)
+        ::LZ4::compress(data)
+      end
+
+      def self.headers
+        {}
+      end
+    end
+
+    module LZ4HC
+      def self.compress(data)
+        ::LZ4::compressHC(data)
+      end
+
+      def self.headers
+        {}
       end
     end
   end
