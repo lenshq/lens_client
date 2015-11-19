@@ -1,3 +1,3 @@
 module Lens
-  VERSION = "0.0.7"
+  VERSION = "0.0.8"
 end
