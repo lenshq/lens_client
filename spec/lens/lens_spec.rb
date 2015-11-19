@@ -26,7 +26,7 @@ describe Lens do
         subject { described_class.configuration.compressor }
 
         it { is_expected.to respond_to :compress }
-        it { is_expected.to be Lens::Compression::Gzip }
+        it { is_expected.to be Lens::Compression::LZ4 }
       end
 
       describe 'configuration' do

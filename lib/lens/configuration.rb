@@ -33,7 +33,7 @@ module Lens
     end
 
     def default_compressor
-      Compression::Gzip
+      Compression::LZ4
     end
   end
 end
