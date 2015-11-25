@@ -29,6 +29,14 @@ gem 'lens', github: 'lenshq/lens_client'
 # config/initializers/lens.rb
 Lens.configure do |config|
   config.app_key = 'super_secret_key'
+end
+```
+
+if you want to use Lens server at your instance
+```ruby
+# config/initializers/lens.rb
+Lens.configure do |config|
+  config.app_key = 'super_secret_key'
   config.protocol = 'http'
   config.host = 'localhost'
   config.port = 3001
