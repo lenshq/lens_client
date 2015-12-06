@@ -4,7 +4,7 @@ raise 'WTF!?!?! Where is Rails man? ❨╯°□°❩╯︵┻━┻' unless defi
 
 require 'lens/core'
 require 'lens/railtie'
-require 'lens/lens_memprof'
+require 'lens_memprof'
 
 module Lens
   class << self
