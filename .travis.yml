@@ -19,4 +19,4 @@ matrix:
     - rvm: jruby-19mode
     - rvm: jruby-head
     - rvm: rbx-2
-script: bundle exec rspec spec
+script: bundle exec rake compile && bundle exec rspec spec

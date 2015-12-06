@@ -1,3 +1,4 @@
-require "mkmf"
+require 'mkmf'
 
-create_makefile("lens_memprof/lens_memprof")
+dir_config('lens_memprof')
+create_makefile('lens_memprof')
