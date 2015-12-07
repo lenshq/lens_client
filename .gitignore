@@ -2,4 +2,6 @@
 *.swp
 *.swo
 coverage
+*.so
 /Gemfile.lock
+/tmp
