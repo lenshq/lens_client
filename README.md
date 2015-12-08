@@ -42,3 +42,13 @@ Lens.configure do |config|
   config.port = 3001
 end
 ```
+
+If you want to see information about memory allocations - you should enable this functionality:
+```ruby
+# config/initializers/lens.rb
+Lens.configure do |config|
+  # ...
+  config.show_memory_usage = true
+  # ...
+end
+```

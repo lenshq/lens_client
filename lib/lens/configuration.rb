@@ -1,6 +1,6 @@
 module Lens
   class Configuration
-    attr_accessor :app_key, :secret, :protocol, :host, :port
+    attr_accessor :app_key, :secret, :protocol, :host, :port, :show_memory_usage
 
     def protocol
       @protocol || default_protocol
@@ -16,6 +16,10 @@ module Lens
 
     def compressor
       default_compressor
+    end
+
+    def with_memory_usage?
+      @show_memory_usage || default_memory_usage
     end
 
     private
@@ -34,6 +38,10 @@ module Lens
 
     def default_compressor
       Compression::LZ4
+    end
+
+    def default_memory_usage
+      false
     end
   end
 end

@@ -9,7 +9,8 @@ describe Lens do
           app_key: 'secret-key',
           protocol: 'https',
           host: 'example.com',
-          port: 8080
+          port: 8080,
+          show_memory_usage: true
         }
       end
       before { configure(params) }
@@ -19,6 +20,7 @@ describe Lens do
       it { expect(subject.protocol).to eq params[:protocol] }
       it { expect(subject.host).to eq params[:host] }
       it { expect(subject.port).to eq params[:port] }
+      it { expect(subject.with_memory_usage?).to eq params[:show_memory_usage] }
     end
 
     context 'when default params' do
@@ -101,5 +103,6 @@ def configure(params)
     config.protocol = params[:protocol] if params[:protocol].present?
     config.host = params[:host] if params[:host].present?
     config.port = params[:port] if params[:port].present?
+    config.show_memory_usage = params[:show_memory_usage] if params[:show_memory_usage].present?
   end
 end

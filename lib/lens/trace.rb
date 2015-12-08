@@ -8,7 +8,7 @@ module Lens
       @gc_statistics.enable
 
       @allocations_data = Lens::AllocationsData.new
-      @allocations_data.enable
+      @allocations_data.enable if Lens.configuration.with_memory_usage?
     end
 
     def add(event)

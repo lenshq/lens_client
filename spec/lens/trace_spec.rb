@@ -2,6 +2,8 @@ require 'spec_helper'
 
 RSpec.describe Lens::Trace do
   describe '.process' do
+    before { Lens.configure { |config| config.show_memory_usage = true } }
+
     let(:first_event) { generate_event('start_processing.action_controller') }
     let(:last_event) { generate_event('process_action.action_controller') }
 
